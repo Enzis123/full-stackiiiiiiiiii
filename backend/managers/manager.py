@@ -1,22 +1,24 @@
 from fastapi import HTTPException
-from models.modelServicios import modelServicios
 
 
 def listar(db):
     filas = db.execute("SELECT * FROM servicios").fetchall()
-    return [dict(f) for f in filas]
+    lista = []
+    for fila in filas:
+        lista.append(dict(fila))
+    return lista
 
 
-def crear(db, s: modelServicios):
+def crear(db, s):
     cursor = db.execute(
         "INSERT INTO servicios (servicio, descripcion, precio, categoria) VALUES (?, ?, ?, ?)",
         (s.servicio, s.descripcion, s.precio, s.categoria)
     )
     db.commit()
-    return {"ok": True, "id": cursor.lastrowid}
+    return {"mensaje": "Servicio agregado", "id": cursor.lastrowid}
 
 
-def editar(db, id, s: modelServicios):
+def editar(db, id, s):
     cursor = db.execute(
         "UPDATE servicios SET servicio = ?, descripcion = ?, precio = ?, categoria = ? WHERE id = ?",
         (s.servicio, s.descripcion, s.precio, s.categoria, id)
@@ -24,7 +26,7 @@ def editar(db, id, s: modelServicios):
     if cursor.rowcount == 0:
         raise HTTPException(status_code=404, detail="Servicio no encontrado")
     db.commit()
-    return {"ok": True}
+    return {"mensaje": "Servicio editado"}
 
 
 def borrar(db, id):
@@ -32,4 +34,4 @@ def borrar(db, id):
     if cursor.rowcount == 0:
         raise HTTPException(status_code=404, detail="Servicio no encontrado")
     db.commit()
-    return {"ok": True}
+    return {"mensaje": "Servicio borrado"}
