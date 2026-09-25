@@ -1,0 +1,9 @@
+# Entorno virtual de Python
+env/
+
+# Archivos compilados de Python
+__pycache__/
+*.pyc
+
+# Base de datos vacía que sobra
+backend/database/db.db
