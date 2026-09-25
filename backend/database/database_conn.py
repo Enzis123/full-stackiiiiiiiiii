@@ -1,6 +1,8 @@
+import os
 import sqlite3
 
-DB_PATH = "db.db"
+# Ruta absoluta a backend/db.db, así funciona sin importar desde qué carpeta se ejecute
+DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "db.db")
 
 
 def get_db():
