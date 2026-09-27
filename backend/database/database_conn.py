@@ -1,13 +1,17 @@
+import os
 import sqlite3
 
-db = "database/db.db"
+# Ruta a database/db.db: funciona sin importar desde qué carpeta se ejecute
+db = os.path.join(os.path.dirname(os.path.abspath(__file__)), "db.db")
 
 
 def get_db():
     conn = sqlite3.connect(db)
     conn.row_factory = sqlite3.Row
-    yield conn
-    conn.close()
+    try:
+        yield conn
+    finally:
+        conn.close()
 
 
 def init_db():
