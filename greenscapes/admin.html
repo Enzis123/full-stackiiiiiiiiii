@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenScapes · Administrar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin">
+
+<header>
+    <nav>
+        <a href="index.html" class="logo">GreenScapes</a>
+        <ul>
+            <li><a href="index.html">Servicios</a></li>
+            <li><a href="admin.html">Administrar</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="admin_section">
+
+    <h2>Administrar servicios</h2>
+
+    <form id="formulario" class="card" onsubmit="guardar(event)">
+        <h3 id="titulo_form">Agregar servicio</h3>
+
+        <input type="hidden" id="id">
+
+        <label for="servicio">Nombre</label>
+        <input type="text" id="servicio" required>
+
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" required></textarea>
+
+        <label for="precio">Precio ($)</label>
+        <input type="number" id="precio" min="0" required>
+
+        <label for="categoria">Categoría</label>
+        <select id="categoria">
+            <option>Parque</option>
+            <option>Pileta</option>
+            <option>Mantenimiento</option>
+        </select>
+
+        <div class="botones">
+            <button type="submit" class="btn">Guardar</button>
+            <button type="button" class="btn gris" onclick="limpiar()">Cancelar</button>
+        </div>
+
+        <p id="mensaje"></p>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Servicio</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="tabla"></tbody>
+    </table>
+
+</main>
+
+<footer>
+    <p>&copy; GreenScapes · Panel de administración</p>
+</footer>
+
+<script src="admin.js"></script>
+</body>
+</html>

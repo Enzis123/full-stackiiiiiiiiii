@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenScapes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="index.html" class="logo">GreenScapes</a>
+        <ul>
+            <li><a href="#parque">Parque</a></li>
+            <li><a href="#pileta">Pileta</a></li>
+            <li><a href="#mantenimiento">Mantenimiento</a></li>
+            <li><a href="admin.html">Administrar</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+<section class="inicio_section">
+    <h1>Green<span>Scapes</span></h1>
+    <p>Mantenimiento de parques y piletas en barrios privados.</p>
+    <a href="#parque" class="btn">Ver servicios</a>
+</section>
+
+<section id="parque" class="servicios_section parque">
+    <h2>Parque</h2>
+    <p class="subtitulo">Césped, poda y todo lo verde.</p>
+    <div id="lista_parque" class="grid"></div>
+</section>
+
+<section id="pileta" class="servicios_section pileta">
+    <h2>Pileta</h2>
+    <p class="subtitulo">Agua limpia y lista para disfrutar.</p>
+    <div id="lista_pileta" class="grid"></div>
+</section>
+
+<section id="mantenimiento" class="servicios_section mantenimiento">
+    <h2>Mantenimiento</h2>
+    <p class="subtitulo">Nos ocupamos de los detalles de tu casa.</p>
+    <div id="lista_mantenimiento" class="grid"></div>
+</section>
+
+</main>
+
+<footer>
+    <p>&copy; GreenScapes · Barrios privados</p>
+</footer>
+
+<script src="servicios.js"></script>
+</body>
+</html>
