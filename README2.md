@@ -248,6 +248,37 @@ Si el proyecto creciera y tuviera varios servidores, todos podrían atender pedi
 
 ---
 
+## Preguntas rápidas que puede hacer el profe
+
+**¿Qué hace `Depends`?**  
+Le dice a FastAPI que ejecute `get_db()` y le pase la conexión a la función.
+
+**¿Qué pasa si apago la API?**  
+Las páginas pueden abrirse, pero los `fetch` fallan y no aparecen los servicios. Los datos siguen guardados en SQLite.
+
+**¿Por qué aparece un 422?**  
+Porque los datos no cumplen el modelo de Pydantic.
+
+**¿Dónde se guardan los datos?**  
+En `backend/database/db.db`, en la tabla `servicios`.
+
+**¿Qué es Uvicorn?**  
+Es el servidor que ejecuta la API y escucha en `127.0.0.1:8000`.
+
+**¿Por qué hay dos páginas?**  
+`index.html` es para mostrar el catálogo y `admin.html` para administrarlo.
+
+**¿Qué hace `preventDefault()`?**  
+Evita que el formulario recargue la página para poder manejarlo con JavaScript.
+
+**¿Qué diferencia hay entre POST y PUT?**  
+POST crea un servicio nuevo y PUT modifica uno que ya existe.
+
+**¿Qué es SQLite?**  
+Es una base de datos que se guarda en un archivo y no necesita un servidor aparte.
+
+---
+
 ## Glosario rápido
 
 - **API:** programa que permite que otros programas hagan pedidos y reciban datos.
@@ -263,3 +294,14 @@ Si el proyecto creciera y tuviera varios servidores, todos podrían atender pedi
 - **fetch:** función de JavaScript para hacer pedidos HTTP.
 - **Stateless:** el servidor no guarda el estado de las peticiones anteriores.
 
+---
+
+## Para la exposición
+
+La idea principal de GreenScapes es:
+
+**Navegador → API FastAPI → SQLite**
+
+El navegador pide o manda datos, FastAPI recibe y valida, y el manager se encarga de hablar con la base de datos.
+
+Lo más importante para explicar es el recorrido de una petición, quién es el cliente y servidor, HTTP, CORS, la separación de responsabilidades, JSON y statelessness.
