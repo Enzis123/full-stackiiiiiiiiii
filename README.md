@@ -164,7 +164,7 @@ Respuesta con código **422**:
 
 ### Pregunta 1 — El ciclo de vida de una petición
 
-_Cuando le damos a `guardar` en el formulario de html, la peticion hace sigue el siguiente ciclo:
+Cuando le damos a `guardar` en el formulario de html, la peticion hace sigue el siguiente ciclo:
 Cliente:
     Se ejecuta una funcion llamada `guardar()`, el `event.preventDefault()` frena el comportamiento normal del formulario, que es recargar la página, junta todo lo que se escribieron en los inputs y lo mete en un objeto de `datos`: servicio, descripcion, precio, categoría.
     Se hace un `fetch` a `http://127.0.0.1:8000/agregar_servicios` con el método **POST**, los datos terminan viajando en el body convertidos en texto JSON con JSON.stringify.
@@ -182,7 +182,7 @@ La vuelta al navegador:
     en `admin.js`, el `.then(res => res.json())` convierte la respuesta en un objeto.
     el `.then()` que le sigue hace las siguientes 3 cosas, `mostrar()` pone el mensaje en pantalla, `limpiar()` vacía el formulario y `cargar()` hace otro fetch, esta vez un GET a `/ver_servicios`, para traer la lista actualizada y redibuja la tabla._
 
-![Solicitud "Guardar"](<docs/solicitud guardar .png>)
+![Solicitud "Guardar"](<docs/graficos/solicitud-guardar.png>)
 ### Pregunta 2 — ¿Quién es el cliente y quién es el servidor?
 
 _Respuesta pendiente + diagrama de arquitectura general._
