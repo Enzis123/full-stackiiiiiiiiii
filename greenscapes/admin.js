@@ -23,7 +23,7 @@ function cargar() {
             });
             document.getElementById("tabla").innerHTML = filas;
         })
-        .catch(() => mostrar("No se pudo conectar con la API. ¿Está corriendo uvicorn?"));
+        .catch(() => mostrar("No se pudo conectar con la API."));
 }
 
 
