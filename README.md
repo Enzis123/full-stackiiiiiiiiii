@@ -1,7 +1,7 @@
 # GreenScapes — TP Full Stack
 
-**Nombre y apellido:** _completar_  
-**Curso:** _completar_
+**Nombre y apellido:** Enzo Benjamin Romero  
+**Curso:** 6° 5°
 
 ---
 
@@ -31,21 +31,28 @@ Cada servicio tiene nombre, descripción, precio y categoría.
 
 ## Instalación y ejecución
 
-Requisitos: Python 3.9 o más nuevo y Git.
+Requisitos: **Python 3.10 o más nuevo** y **Git**.
 
-```bash
-git clone https://github.com/Enzis123/full-stackiiiiiiiiiii.git
-cd full-stackiiiiiiiiiii
-python -m venv env
-env\Scripts\activate
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload
-```
-
-La API queda en `http://127.0.0.1:8000` y la documentación en `http://127.0.0.1:8000/docs`.
-
-Después abrir `greenscapes/index.html` o `admin.html`.
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/Enzis123/full-stackiiiiiiiiiii.git
+   cd full-stackiiiiiiiiiii
+   ```
+2. Crear y activar el entorno virtual:
+   ```bash
+   python -m venv env
+   env\Scripts\activate            # Windows (CMD)
+   .\env\Scripts\Activate.ps1      # Windows (PowerShell)
+   source env/bin/activate        # Linux o Mac
+   ```
+3. Instalar las dependencias y levantar la API:
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+   uvicorn main:app --reload
+   ```
+   La API queda en `http://127.0.0.1:8000` y la documentación en `http://127.0.0.1:8000/docs`.
+4. Con la API corriendo, abrir `greenscapes/index.html` (catálogo) o `greenscapes/admin.html` (administración) en el navegador, con doble clic o con la extensión Live Server de VS Code.
 
 ---
 
@@ -67,11 +74,111 @@ Después abrir `greenscapes/index.html` o `admin.html`.
 - **422:** los datos enviados no cumplen el modelo de Pydantic.
 - **500:** error interno del servidor.
 
+### Ejemplos de request y response
+
+**Listar servicios**
+```http
+GET /ver_servicios
+```
+```json
+[
+  {"id": 5, "servicio": "Corte de pasto chico", "descripcion": "Corte de pasto hasta 100m2, incluye bordeado y retiro de restos", "precio": 60000.0, "categoria": "Parque"},
+  {"id": 15, "servicio": "Limpieza de pileta", "descripcion": "Barrido de fondo, limpieza de paredes y línea de flote, aspirado y control de cloro", "precio": 55000.0, "categoria": "Pileta"}
+]
+```
+
+**Buscar un servicio**
+```http
+GET /ver_servicio/5
+```
+```json
+{"id": 5, "servicio": "Corte de pasto chico", "descripcion": "Corte de pasto hasta 100m2, incluye bordeado y retiro de restos", "precio": 60000.0, "categoria": "Parque"}
+```
+Si el id no existe:
+```json
+{"mensaje": "No existe un servicio con ese id"}
+```
+
+**Crear un servicio**
+```http
+POST /agregar_servicios
+Content-Type: application/json
+
+{"servicio": "Limpieza de filtro", "descripcion": "Limpieza del filtro de la pileta", "precio": 30000, "categoria": "Pileta"}
+```
+```json
+{"mensaje": "Servicio agregado"}
+```
+
+**Editar un servicio**
+```http
+PUT /editar_servicio/31
+Content-Type: application/json
+
+{"servicio": "Limpieza de filtro", "descripcion": "Limpieza del filtro de la pileta", "precio": 35000, "categoria": "Pileta"}
+```
+```json
+{"mensaje": "Servicio editado"}
+```
+
+**Borrar un servicio**
+```http
+DELETE /borrar_servicio/31
+```
+```json
+{"mensaje": "Servicio borrado"}
+```
+
+**Request inválido** (falta `descripcion` y `categoria`, y el precio no es un número)
+```http
+POST /agregar_servicios
+Content-Type: application/json
+
+{"servicio": "Poda", "precio": "mucho"}
+```
+Respuesta con código **422**:
+```json
+{
+  "detail": [
+    {"type": "missing", "loc": ["body", "descripcion"], "msg": "Field required"},
+    {"type": "float_parsing", "loc": ["body", "precio"], "msg": "Input should be a valid number, unable to parse string as a number"},
+    {"type": "missing", "loc": ["body", "categoria"], "msg": "Field required"}
+  ]
+}
+```
+
 ---
 
-# Preguntas de arquitectura cliente-servidor
+## Capturas de pantalla
 
-## Pregunta 1 — El ciclo de vida de una petición
+**Inicio**
+![Inicio](docs/capturas/inicio.png)
+
+**Catálogo de servicios**
+![Servicios](docs/capturas/servicios.png)
+
+**Panel de administración**
+![Administrar](docs/capturas/admin.png)
+
+**Vista en celular**
+
+<img src="docs/capturas/celular.png" alt="Vista en celular" width="300">
+
+---
+
+## Criterios de diseño
+
+- **Dos páginas separadas:** el catálogo (`index.html`) solo muestra servicios y la administración (`admin.html`) tiene agregar, editar y borrar. Así el que mira los servicios no ve los botones de administración.
+- **Colores por categoría:** Parque en verde clarito y blanco, Pileta en beige claro y celeste claro, Mantenimiento en gris y blanco. La portada y el panel de administración usan verde oscuro con negro.
+- **HTML, CSS y JavaScript sin frameworks**, para que el código sea simple y fácil de entender.
+- **Backend separado en capas:** `database/` (conexión), `models/` (modelo de datos), `managers/` (consultas a la base) y `main.py` (endpoints).
+- **SQLite** como base de datos, porque es un solo archivo y no hace falta instalar un servidor de base de datos.
+
+---
+
+## Preguntas de arquitectura cliente-servidor
+
+### Pregunta 1 — El ciclo de vida de una petición
 
 Cuando toco **Guardar** en `admin.html` pasa esto:
 
@@ -93,7 +200,7 @@ Cuando toco **Guardar** en `admin.html` pasa esto:
 
 ---
 
-## Pregunta 2 — ¿Quién es el cliente y quién es el servidor?
+### Pregunta 2 — ¿Quién es el cliente y quién es el servidor?
 
 El **cliente** es el navegador, que ejecuta el HTML, CSS y JavaScript de `greenscapes/`.
 
@@ -109,7 +216,7 @@ A diferencia de una app de escritorio, acá la interfaz y los datos están separ
 
 ---
 
-## Pregunta 3 — HTTP como lenguaje común
+### Pregunta 3 — HTTP como lenguaje común
 
 **HTTP** es el conjunto de reglas que usa el navegador para comunicarse con la API.
 
@@ -122,9 +229,9 @@ Un pedido tiene principalmente:
 
 La respuesta tiene un código de estado y un body, que en este proyecto es JSON.
 
-### Tabla de la API
+#### Tabla de la API
 
-| Operación | Método | Ruta | Éxito | Error |
+| Operación | Método | Ruta | Código de éxito | Código de error |
 |---|---|---|---|---|
 | Crear | POST | `/agregar_servicios` | 200 | 422 |
 | Listar | GET | `/ver_servicios` | 200 + lista JSON | — |
@@ -136,7 +243,7 @@ Un detalle: si el id es un número pero no existe, actualmente la API devuelve 2
 
 ---
 
-## Pregunta 4 — CORS
+### Pregunta 4 — CORS
 
 CORS sirve para que el navegador pueda aceptar respuestas de una API que está en otro origen.
 
@@ -169,7 +276,7 @@ Importante: **CORS no protege la API contra Postman, curl o scripts**. Es una re
 
 ---
 
-## Pregunta 5 — Separación de responsabilidades
+### Pregunta 5 — Separación de responsabilidades
 
 Cada parte del backend tiene una función:
 
@@ -184,7 +291,7 @@ La idea es no mezclar todo en un solo archivo.
 
 Por ejemplo, `main.py` recibe el pedido, pero no hace directamente el SQL. El manager se encarga de eso.
 
-### ¿Qué hace `Depends(get_db)`?
+#### ¿Qué hace `Depends(get_db)`?
 
 Le dice a FastAPI que antes de ejecutar la ruta tiene que llamar a `get_db()` y pasarle la conexión.
 
@@ -194,7 +301,7 @@ Así cada pedido usa su conexión y esta se cierra aunque haya un error.
 
 ---
 
-## Pregunta 6 — JSON como formato de intercambio
+### Pregunta 6 — JSON como formato de intercambio
 
 **JSON** es un formato de texto con claves y valores que sirve para pasar datos entre el navegador y la API.
 
@@ -232,7 +339,7 @@ Si los datos no cumplen el modelo de Pydantic, la API devuelve **422** y no guar
 
 ---
 
-## Pregunta 7 — Statelessness (sin estado)
+### Pregunta 7 — Statelessness (sin estado)
 
 **Stateless** significa que el servidor no depende de recordar las peticiones anteriores.
 

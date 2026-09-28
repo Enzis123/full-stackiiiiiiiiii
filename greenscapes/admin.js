@@ -52,10 +52,15 @@ function guardar(event) {
     })
         .then(res => res.json())
         .then(respuesta => {
-            mostrar(respuesta.mensaje || respuesta.detail);
+            if (respuesta.detail) {
+                mostrar("Revisá los datos: hay campos vacíos o inválidos.");
+                return;
+            }
+            mostrar(respuesta.mensaje);
             limpiar();
             cargar();
-        });
+        })
+        .catch(() => mostrar("No se pudo conectar con la API."));
 }
 
 
@@ -76,9 +81,10 @@ function borrar(id) {
     fetch(API + "/borrar_servicio/" + id, { method: "DELETE" })
         .then(res => res.json())
         .then(respuesta => {
-            mostrar(respuesta.mensaje || respuesta.detail);
+            mostrar(respuesta.mensaje);
             cargar();
-        });
+        })
+        .catch(() => mostrar("No se pudo conectar con la API."));
 }
 
 function limpiar() {
