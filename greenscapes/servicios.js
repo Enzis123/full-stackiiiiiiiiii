@@ -1,6 +1,6 @@
 const API = "http://127.0.0.1:8000";
 
-// Pido los servicios a la API y pongo cada uno en la sección de su categoría
+
 fetch(API + "/ver_servicios")
     .then(res => res.json())
     .then(servicios => {

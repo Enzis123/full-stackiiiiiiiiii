@@ -1,7 +1,7 @@
 const API = "http://127.0.0.1:8000";
 let servicios = [];
 
-// Trae los servicios y arma la tabla
+
 function cargar() {
     fetch(API + "/ver_servicios")
         .then(res => res.json())
@@ -26,7 +26,7 @@ function cargar() {
         .catch(() => mostrar("No se pudo conectar con la API. ¿Está corriendo uvicorn?"));
 }
 
-// Agrega o edita, según si hay un id cargado
+
 function guardar(event) {
     event.preventDefault();
 
@@ -58,7 +58,7 @@ function guardar(event) {
         });
 }
 
-// Pasa los datos del servicio al formulario
+
 function editar(id) {
     const s = servicios.find(s => s.id === id);
     document.getElementById("id").value = s.id;
