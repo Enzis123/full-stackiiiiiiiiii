@@ -164,25 +164,25 @@ Respuesta con código **422**:
 
 ### Pregunta 1 — El ciclo de vida de una petición
 
-    Cuando le damos a `guardar` en el formulario de html, la peticion hace sigue el siguiente ciclo:
-    Cliente:
-        Se ejecuta una funcion llamada `guardar()`, el `event.preventDefault()` frena el comportamiento normal del formulario, que es recargar la página, junta todo lo que se escribieron en los inputs y lo mete en un objeto de `datos`: servicio, descripcion, precio, categoría.
-        Se hace un `fetch` a `http://127.0.0.1:8000/agregar_servicios` con el método **POST**, los datos terminan viajando en el body convertidos en texto JSON con JSON.stringify.
+_Cuando le damos a `guardar` en el formulario de html, la peticion hace sigue el siguiente ciclo:
+Cliente:
+    Se ejecuta una funcion llamada `guardar()`, el `event.preventDefault()` frena el comportamiento normal del formulario, que es recargar la página, junta todo lo que se escribieron en los inputs y lo mete en un objeto de `datos`: servicio, descripcion, precio, categoría.
+    Se hace un `fetch` a `http://127.0.0.1:8000/agregar_servicios` con el método **POST**, los datos terminan viajando en el body convertidos en texto JSON con JSON.stringify.
 
-    API:
-        Uvicorn recibe el pedido y FastApi busca qué funcion corresopnde a la solicitrud, que es `agregar_servicio`.
-        **Pydantic** agarra el JSOn y lo convierte en un objeto de `ModelServicios`, si en este paso falta un campo o el precio no es un número corta ahi y el mismo Pydantic tira el error 422, sin tocar la base.
-        depends(get_db)abre la conexión a la base y se pasa a la función.
+API:
+    Uvicorn recibe el pedido y FastApi busca qué funcion corresopnde a la solicitrud, que es `agregar_servicio`.
+    **Pydantic** agarra el JSOn y lo convierte en un objeto de `ModelServicios`, si en este paso falta un campo o el precio no es un número corta ahi y el mismo Pydantic tira el error 422, sin tocar la base.
+    depends(get_db)abre la conexión a la base y se pasa a la función.
 
-    Manager:
-        Aca, `crear()` ejecuta el `INSERT INTO servicios ...` con los daots y hace el db.commit(), en esta parte es cuando el dato queda guardado de verdad en el archivo`, y se devuelve el mensaje `{"mensaje": "Servicio agregado"}`.
+Manager:
+    Aca, `crear()` ejecuta el `INSERT INTO servicios ...` con los daots y hace el db.commit(), en esta parte es cuando el dato queda guardado de verdad en el archivo`, y se devuelve el mensaje `{"mensaje": "Servicio agregado"}`.
 
-    La vuelta al navegador:
-        Por ultimo la API responde con código 200 y ese JSON. `get_db` cierra la coonexión. 
-        en `admin.js`, el `.then(res => res.json())` convierte la respuesta en un objeto.
-        el `.then()` que le sigue hace las siguientes 3 cosas, `mostrar()` pone el mensaje en pantalla, `limpiar()` vacía el formulario y `cargar()` hace otro fetch, esta vez un GET a `/ver_servicios`, para traer la lista actualizada y redibuja la tabla. 
+La vuelta al navegador:
+    Por ultimo la API responde con código 200 y ese JSON. `get_db` cierra la coonexión. 
+    en `admin.js`, el `.then(res => res.json())` convierte la respuesta en un objeto.
+    el `.then()` que le sigue hace las siguientes 3 cosas, `mostrar()` pone el mensaje en pantalla, `limpiar()` vacía el formulario y `cargar()` hace otro fetch, esta vez un GET a `/ver_servicios`, para traer la lista actualizada y redibuja la tabla._
 
-    ![Solicitud "Guardar"](<docs/solicitud guardar .png>)
+![Solicitud "Guardar"](<docs/solicitud guardar .png>)
 ### Pregunta 2 — ¿Quién es el cliente y quién es el servidor?
 
 _Respuesta pendiente + diagrama de arquitectura general._
