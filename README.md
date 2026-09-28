@@ -182,7 +182,8 @@ La vuelta al navegador:
     en `admin.js`, el `.then(res => res.json())` convierte la respuesta en un objeto.
     el `.then()` que le sigue hace las siguientes 3 cosas, `mostrar()` pone el mensaje en pantalla, `limpiar()` vacía el formulario y `cargar()` hace otro fetch, esta vez un GET a `/ver_servicios`, para traer la lista actualizada y redibuja la tabla._
 
-![Solicitud "Guardar"](<docs/solicitud guardar .png>)
+![Solicitud "Guardar"](docs/solicitud-guardar.png)
+
 ### Pregunta 2 — ¿Quién es el cliente y quién es el servidor?
 
 _Respuesta pendiente + diagrama de arquitectura general._
