@@ -261,12 +261,21 @@ Como cambia el puerto, son orígenes distintos.
 En `main.py` se usa `CORSMiddleware` con:
 
 ```python
-allow_origins=["*"]
-allow_methods=["*"]
-allow_headers=["*"]
+origenes_permitidos = [
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
+    "null",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origenes_permitidos,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["Content-Type"],
+)
 ```
 
-Eso permite que cualquier origen pueda usar la API. Para producción sería mejor poner solamente el dominio necesario.
+Solo pueden usar la API las páginas abiertas con Live Server (`127.0.0.1:5500` o `localhost:5500`) o con doble clic (el navegador manda el origen `null`). Cualquier otro origen queda bloqueado por el navegador.
 
 En pedidos como POST, PUT o DELETE, el navegador puede hacer primero un **OPTIONS**, llamado preflight, para preguntar si tiene permiso. Después manda el pedido real.
 
