@@ -175,7 +175,7 @@ API:
     depends(get_db)abre la conexión a la base y se pasa a la función.
 
 Manager:
-    Aca, `crear()` ejecuta el `INSERT INTO servicios ...` con los daots y hace el db.commit(), en esta parte es cuando el dato queda guardado de verdad en el archivo`, y se devuelve el mensaje `{"mensaje": "Servicio agregado"}`.
+    Aca, `crear()` ejecuta el `INSERT INTO servicios ...` con los daots y hace el db.commit(), en esta parte es cuando el dato queda guardado de verdad en el archivo, y se devuelve el mensaje `{"mensaje": "Servicio agregado"}`.
 
 La vuelta al navegador:
     Por ultimo la API responde con código 200 y ese JSON. `get_db` cierra la coonexión. 
