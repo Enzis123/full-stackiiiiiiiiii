@@ -54,6 +54,13 @@ Requisitos: **Python 3.10 o más nuevo** y **Git**.
    La API queda en `http://127.0.0.1:8000` y la documentación en `http://127.0.0.1:8000/docs`.
 4. Con la API corriendo, abrir `greenscapes/index.html` (catálogo) o `greenscapes/admin.html` (administración) en el navegador, con doble clic o con la extensión Live Server de VS Code.
 
+### Versión online
+
+- Página: https://greenscapesproyect.netlify.app
+- API: https://full-stackiiiiiiiiiii.onrender.com/ver_servicios
+
+La API está en Render (plan gratis): si no se usa por un rato se duerme y el primer pedido puede tardar cerca de un minuto.
+
 ---
 
 ## Endpoints

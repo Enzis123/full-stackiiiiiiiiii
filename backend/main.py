@@ -8,6 +8,7 @@ app = FastAPI()
 db_conn.init_db()
 
 origenes_permitidos = [
+    "https://greenscapesproyect.netlify.app",
     "http://127.0.0.1:5500",
     "http://localhost:5500",
     "null",
