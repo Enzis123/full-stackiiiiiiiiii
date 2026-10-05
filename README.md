@@ -4,7 +4,7 @@
 ### Curso: 6to 5ta
 
 **Página online:** https://greenscapesproyect.netlify.app
-**API online:** https://full-stackiiiiiiiiiii.onrender.com/docs
+**API online:** https://full-stackiiiiiiiiii.onrender.com/docs
 
 ---
 
@@ -33,7 +33,7 @@
 ## Estructura del proyecto
 
 ```
-full-stackiiiiiiiiiii/
+full-stackiiiiiiiiii/
 ├── README.md
 ├── backend/
 │   ├── main.py                  → app FastAPI, rutas y CORS
@@ -63,8 +63,8 @@ Se necesita **Python 3.10 o más nuevo** y **Git**.
 **1. Clonar el repositorio**
 
 ```bash
-git clone https://github.com/Enzis123/full-stackiiiiiiiiiii.git
-cd full-stackiiiiiiiiiii
+git clone https://github.com/Enzis123/full-stackiiiiiiiiii.git
+cd full-stackiiiiiiiiii
 ```
 
 **2. Crear el entorno virtual e instalar las dependencias**
@@ -86,12 +86,7 @@ La API queda en `http://127.0.0.1:8000`.
 
 **4. Abrir el frontend**
 
-Con la API corriendo, abrir `greenscapes/index.html` con **Live Server** de VS Code (puerto 5500), o desde otra terminal:
-
-```bash
-cd greenscapes
-python -m http.server 5500
-```
+Con la API corriendo, abrir `greenscapes/index.html` con **Live Server**
 
 y entrar a `http://127.0.0.1:5500`. También funciona abriendo `index.html` con doble clic.
 
@@ -100,7 +95,7 @@ y entrar a `http://127.0.0.1:5500`. También funciona abriendo `index.html` con 
 FastAPI genera sola una página donde se pueden ver y probar todos los endpoints:
 
 * Local: http://127.0.0.1:8000/docs
-* Online: https://full-stackiiiiiiiiiii.onrender.com/docs
+* Online: https://full-stackiiiiiiiiii.onrender.com/docs
 
 > La API online está en el plan gratis de Render: si nadie la usa un rato "se duerme" y la primera petición tarda unos segundos. Además, los cambios que se hagan en la base online se pierden cuando Render reinicia el servidor.
 
@@ -240,7 +235,7 @@ Los **códigos de estado** son números que manda el servidor para decir cómo s
 
 ![CORS](docs/graficos/cors.png)
 
-El **SOP (Same-Origin Policy)** es una regla de seguridad del navegador: una página solo puede leer respuestas de su **mismo origen**. El origen es la combinación de protocolo + dominio + puerto. Por ejemplo `https://greenscapesproyect.netlify.app` y `https://full-stackiiiiiiiiiii.onrender.com` son orígenes distintos, y en local también lo son `http://127.0.0.1:5500` (Live Server) y `http://127.0.0.1:8000` (la API), porque cambia el puerto.
+El **SOP (Same-Origin Policy)** es una regla de seguridad del navegador: una página solo puede leer respuestas de su **mismo origen**. El origen es la combinación de protocolo + dominio + puerto. Por ejemplo `https://greenscapesproyect.netlify.app` y `https://full-stackiiiiiiiiii.onrender.com` son orígenes distintos, y en local también lo son `http://127.0.0.1:5500` (Live Server) y `http://127.0.0.1:8000` (la API), porque cambia el puerto.
 
 El navegador bloquea esto para que una página cualquiera no pueda usar tu sesión para leer datos de otro sitio sin permiso.
 
@@ -406,7 +401,7 @@ La ventaja es que, si mañana tuviera 3 servidores en vez de 1, cualquier servid
 * Separé el backend en carpetas (`models`, `managers`, `database`) para que cada archivo tenga una sola responsabilidad (ver Pregunta 5).
 * La ruta a `db.db` está armada con `os.path.dirname(__file__)`, así la API siempre usa la misma base sin importar desde qué carpeta se ejecute.
 * `init_db()` crea la tabla `servicios` si no existe, así la API funciona aunque la base esté vacía.
-* En CORS solo permito los orígenes que uso (Netlify y Live Server) y los métodos `GET`, `POST`, `PUT` y `DELETE`, en vez de permitir todo con `"*"`.
+* En CORS solo permito los orígenes que uso (la página de Netlify, Live Server y `"null"` para cuando se abre con doble clic), en vez de permitir cualquier origen con `"*"`.
 
 ---
 
