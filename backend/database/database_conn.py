@@ -1,7 +1,7 @@
 import os
 import sqlite3
 
-db = os.path.join(os.path.dirname(__file__), "db.db")
+db = os.path.join(os.path.dirname(__file__), "db.db") 
 
 
 def get_db():

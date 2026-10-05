@@ -1,6 +1,6 @@
 let API = "http://127.0.0.1:8000";
 if (location.hostname.endsWith("netlify.app")) {
-    API = "https://full-stackiiiiiiiiiii.onrender.com";
+    API = "https://full-stackiiiiiiiiii.onrender.com";
 }
 
 
