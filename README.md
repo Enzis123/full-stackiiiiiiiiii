@@ -396,6 +396,33 @@ La ventaja es que, si mañana tuviera 3 servidores en vez de 1, cualquier servid
   * ``--gris: #6b7479;``
 
 * **Celular**: con un `@media (max-width: 768px)` la página se acomoda a pantallas chicas.
+### ``Desarrollo con Ayuda de AI``
+* Por un par de problemas con respecto a ``JavaScript`` en el diseño de webs dinámicas, se optó por utilizar inteligencia artificial para facilitar y resolver este apartado. La usé para armar los archivos `servicios.js` y `admin.js`, y después los revisé y los fui entendiendo parte por parte para poder explicarlos.
+
+* **Qué hace `servicios.js`** (página pública):
+  * Define la dirección de la API: si la página está en Netlify usa la API de Render, y si no, usa la API local (`127.0.0.1:8000`).
+  * Con `fetch` hace un `GET /ver_servicios` y recibe la lista de servicios en JSON.
+  * Recorre la lista con `forEach` y mete cada servicio en la sección de su categoría (`lista_parque`, `lista_pileta` o `lista_mantenimiento`) usando `innerHTML`.
+  * Muestra el precio con formato argentino con `toLocaleString("es-AR")`.
+  * Si la API no responde, el `.catch()` muestra un aviso.
+
+* **Qué hace `admin.js`** (panel de administración):
+  * `cargar()`: pide los servicios a la API y arma las filas de la tabla, cada una con sus botones de **Editar** y **Borrar**.
+  * `guardar(event)`: frena la recarga del formulario con `preventDefault()`, junta los datos de los campos y los manda con `fetch`. Si el formulario tiene un `id` cargado, usa `PUT` para editar; si no, usa `POST` para crear. Los datos viajan como texto JSON con `JSON.stringify`.
+  * `editar(id)`: busca el servicio en la lista y completa el formulario con sus datos para poder modificarlo.
+  * `borrar(id)`: pide confirmación con `confirm()` y después manda un `DELETE` a la API.
+  * `limpiar()`: vacía el formulario y lo deja otra vez en modo "Agregar servicio".
+  * `mostrar(texto)`: muestra en pantalla los mensajes que devuelve la API o los mensajes de error.
+
+* **Lo que aprendí con esto**: cómo usar `fetch` con los distintos métodos HTTP (`GET`, `POST`, `PUT`, `DELETE`), cómo mandar y leer JSON (`JSON.stringify` y `res.json()`), cómo usar `.then()` y `.catch()` para esperar la respuesta y manejar errores, y cómo modificar el HTML desde JavaScript con `getElementById` e `innerHTML`.
+
+* **Catálogo inicial de servicios**: también usé IA para cargar los primeros servicios de la base de datos. Generó 25 servicios divididos en las tres categorías:
+  * **Parque (10)**: corte de pasto chico, mediano y grande, poda de árboles, poda de cercos y arbustos, desmalezado, colocación de césped en panes, fertilización, control de plagas y retiro de ramas.
+  * **Pileta (7)**: limpieza, mantenimiento mensual, recuperación de agua verde, vaciado y lavado, puesta a punto de temporada, cambio de arena del filtro y cobertor de invierno.
+  * **Mantenimiento (8)**: limpieza de canaletas, hidrolavado de patios y veredas, pintura de rejas y portones, tratamiento de deck de madera, reparación e instalación de riego automático, luces de jardín y mantenimiento general mensual.
+
+  Los nombres y las descripciones están basados en los trabajos que hace la empresa, pero los **precios son de referencia**, no son los precios reales de GreenScapes. Los servicios quedaron guardados en `backend/database/db.db`, y se pueden modificar o borrar desde el panel de administración.
+
 
 ### ``Backend``
 * Separé el backend en carpetas (`models`, `managers`, `database`) para que cada archivo tenga una sola responsabilidad (ver Pregunta 5).

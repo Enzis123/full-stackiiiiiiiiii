@@ -1,3 +1,4 @@
+/* * */
 *{
     box-sizing: border-box;
     padding: 0;
@@ -206,7 +207,7 @@ nav a:hover{
     font-size: 1.2rem;
 }
 
-/* PARQUE: verde clarito con blanco */
+
 
 .parque{
     background: linear-gradient(var(--verde_clarito), var(--blanco));
@@ -225,7 +226,6 @@ nav a:hover{
     border-color: var(--verde);
 }
 
-/* PILETA: beige claro con celeste claro */
 
 .pileta{
     background: var(--beige);
@@ -244,7 +244,6 @@ nav a:hover{
     border-color: var(--azul);
 }
 
-/* MANTENIMIENTO: gris con blanco */
 
 .mantenimiento{
     background: var(--gris_claro);
@@ -263,7 +262,6 @@ nav a:hover{
     border-color: var(--gris);
 }
 
-/* ADMIN: verde oscuro con negro */
 
 .admin{
     background: var(--negro) radial-gradient(circle at 30% 0%, var(--verde_oscuro), var(--negro) 900px) no-repeat;
